@@ -13,7 +13,8 @@ class CommentExt:
 
     def mainTextExt(self, url):
         self._CleanComments = []
-        mainPageParsed = bs(pd.take_content(url), 'html.parser')
+        self.content = pd.take_content(url)
+        mainPageParsed = bs(self.content, 'html.parser')
         Comments = mainPageParsed.select('div p', {'class': 'commentItemDes'})
         for i in Comments:
             Comment = Comments.pop()
@@ -26,7 +27,6 @@ class CommentExt:
         self.content = pd.take_content(epUrl)
         epParsedForComment = bs(self.content, 'html.parser')
         Comments = epParsedForComment.select('p.commentItemDes')
-        print(Comments)
         for Comment in Comments:
             if "commentItemDes" == Comment.get("class")[0]:
                 self._CleanComments.append(self._remove_html_tags(str(Comment)))
