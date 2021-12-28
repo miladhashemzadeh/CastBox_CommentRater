@@ -18,6 +18,7 @@ if __name__ == "__main__":
     #comments = cb.CommentExt().episodeCommentTextExt(dummyUrlEP)
     comments = cb.CommentExt().mainTextExt(dummyUrlMain)
     _normalizer = hazm.Normalizer()
+    finalResult = {}
     for comment in comments:
         if not comment == "":
             text_for_test = _normalizer.normalize(comment)
@@ -33,7 +34,6 @@ if __name__ == "__main__":
             # print(x_text_for_test_words.shape)
             # print(text_for_test_words)
             result = model.predict(x_text_for_test_words)
-            pos_percent = str(int(result[0][1] * 100)) + " % "
-            neg_percent = str(int(result[0][0] * 100)) + " % "
+            finalResult[comment] = result
 
 
